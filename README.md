@@ -33,7 +33,7 @@ This tutorial outlines the implementation of an on-premises-style Active Directo
 <h3>Setup Domain Controller in Azure</h3>
 
 <p>
-  <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Azure Resource Group Creation"/>
+  <img src="./azure-ad/dc-1.png" height="80%" width="80%" alt="Azure Resource Group Creation"/>
 </p>
 
 <p>
@@ -56,7 +56,7 @@ This tutorial outlines the implementation of an on-premises-style Active Directo
 <h3>Setup Client-1 in Azure</h3>
 
 <p>
-  <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Azure Client VM Creation"/>
+  <img src="./azure-ad/client-1.png" height="80%" width="80%" alt="Azure Client VM Creation"/>
 </p>
 
 <p>
@@ -75,7 +75,7 @@ This tutorial outlines the implementation of an on-premises-style Active Directo
 </p>
 
 <p align="center">
-  <img src="https://i.imgur.com/YOUR_PING_SCREENSHOT.png" height="80%" width="80%" alt="Ping Test Between Client-1 and DC-1"/>
+  <img src="./azure-ad/ping.png" height="80%" width="80%" alt="Ping Test Between Client-1 and DC-1"/>
 </p>
 
 <p>
