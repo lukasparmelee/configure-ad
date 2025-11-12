@@ -51,6 +51,10 @@ This tutorial outlines the implementation of an on-premises-style Active Directo
 <strong>6.</strong> Disable the <strong>Windows Firewall</strong> (for testing connectivity).<br />
 </p>
 
+<p align="center">
+  <img src="./firewall.png" height="80%" width="80%" alt="Disabling Windows Firewall on DC-1"/>
+</p>
+
 <br />
 
 <h3>Setup Client-1 in Azure</h3>
@@ -83,4 +87,8 @@ This tutorial outlines the implementation of an on-premises-style Active Directo
 <strong>8.</strong> From Client-1, open <strong>PowerShell</strong> and run:
 <pre><code>ipconfig /all</code></pre>
 <strong>9.</strong> Verify that the <strong>DNS server</strong> is set to DC-1’s private IP address.
+</p>
+
+<p align="center">
+  <img src="./ipconfig.png" height="80%" width="80%" alt="ipconfig /all output showing DC-1 as DNS"/>
 </p>
