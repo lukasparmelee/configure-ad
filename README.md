@@ -88,3 +88,5 @@ This tutorial outlines the implementation of an on-premises-style Active Directo
 <p align="center">
   <img src="./ipconfig.png" height="80%" width="80%" alt="ipconfig /all output showing DC-1 as DNS"/>
 </p>
+
+
