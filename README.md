@@ -89,39 +89,11 @@ This tutorial outlines the implementation of an on-premises-style Active Directo
   <img src="./ipconfig.png" height="80%" width="80%" alt="ipconfig /all output showing DC-1 as DNS"/>
 </p>
 
-<!-- PART 1 -->
-<div class="section">
-    <h1>Part 1 — Deploy & Configure Active Directory</h1>
+Part 1 — Deploy & Configure Active Directory
 
-    <h2>1. Start the VMs</h2>
-    <p>Turn on DC-1 and Client-1 in the Azure Portal.</p>
-    <img src="./screenshots/start-vms.png" alt="Start VMs">
-
-    <h2>2. Install Active Directory Domain Services (AD DS)</h2>
-    <ol>
-        <li>Log into DC-1.</li>
-        <li>Open <strong>Server Manager → Add Roles and Features</strong>.</li>
-        <li>Install <strong>Active Directory Domain Services</strong>.</li>
-        <li>Promote the server to a domain controller.</li>
-        <li>Create a new forest: <code>mydomain.com</code></li>
-        <li>Restart and log back in as <code>mydomain.com\labuser</code>.</li>
-    </ol>
-    <img src="./screenshots/install-adds.png" alt="Install ADDS">
-    <img src="./screenshots/promote-dc.png" alt="Promote Domain Controller">
-
-    <h2>3. Create a Domain Admin User</h2>
-    <ol>
-        <li>Open Active Directory Users and Computers (ADUC).</li>
-        <li>Create an OU named <strong>_EMPLOYEES</strong>.</li>
-        <li>Create another OU named <strong>_ADMINS</strong>.</li>
-        <li>Create a user “Jane Doe” with:
-            <pre>Username: jane_admin
-Password: Cyberlab123!</pre>
-        </li>
-        <li>Add <code>jane_admin</code> to the <strong>Domain Admins</strong> group.</li>
-        <li>Log out and log back in as <code>mydomain.com\jane_admin</code>.</li>
-    </ol>
-    <img src="./screenshots/create-ous.png" alt="Create OUs">
-    <img src="./screenshots/create-admin.png" alt="Create Admin">
-
-
+1. Install Active Directory Domain Services (AD DS)
+	1.	Log into DC-1.
+	2.	Open Server Manager → Add Roles and Features.
+	3.	Install Active Directory Domain Services.
+	4.	Promote DC-1 to a Domain Controller.
+	5.	Create a new forest: mydomain.com
