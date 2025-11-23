@@ -163,222 +163,150 @@ Password: Password1
 
 ![Login Test](./login.png)
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Active Directory Lab – Account Lockouts & Security Operations</title>
-<style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        margin: 0;
-        padding: 0;
-        line-height: 1.6;
-        background: #f7f7f7;
-    }
+---
 
-    header {
-        background: #1f2937;
-        color: white;
-        padding: 20px;
-        text-align: center;
-    }
+🔐 Active Directory Lab — Account Lockouts, Logs, and Account Management
 
-    .container {
-        width: 90%;
-        max-width: 900px;
-        margin: auto;
-        background: white;
-        padding: 25px;
-        margin-top: 25px;
-        margin-bottom: 40px;
-        border-radius: 8px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    }
+📌 Overview
 
-    h2, h3 {
-        color: #1f2937;
-    }
+This section continues the Active Directory environment created earlier using Azure VMs (DC-1 and Client-1).
+In this lab, I will:
+	•	Simulate and observe account lockouts
+	•	Configure Group Policy lockout thresholds
+	•	Enable/disable AD accounts
+	•	Review logs on the Domain Controller and Client
+	•	Understand behavior relevant to cybersecurity and security operations
 
-    .screenshot {
-        margin: 15px 0;
-        background: #eee;
-        padding: 10px;
-        border-left: 4px solid #4b5563;
-        font-size: 14px;
-        font-family: monospace;
-    }
+⸻
+🚀 Part 1 — Simulating Account Lockouts
 
-    .note {
-        background: #e0f2fe;
-        padding: 12px;
-        border-left: 4px solid #0284c7;
-        margin: 15px 0;
-        border-radius: 5px;
-    }
+✔️ 1. Ensure Both VMs Are Running
 
-    .warning {
-        background: #fee2e2;
-        padding: 12px;
-        border-left: 4px solid #dc2626;
-        margin: 15px 0;
-        border-radius: 5px;
-    }
-</style>
-</head>
+Turn on DC-1 and Client-1 in the Azure Portal if they are off.
 
-<body>
+Screenshot Placeholder:
+![Screenshot: Azure VMs Running](./vms.png)
 
-<header>
-    <h1>Active Directory Lab — Account Lockouts, Account Control, & Log Analysis</h1>
-    <p>Continuation of Azure-hosted AD DS Deployment</p>
-</header>
+⸻
 
-<div class="container">
+✔️ 2. Log Into the Domain Controller (DC-1)
 
-<h2>Start the Lab</h2>
-<p>Turn on <strong>DC-1</strong> and <strong>Client-1</strong> in the Azure Portal.</p>
+Screenshot Placeholder:
+![Screenshot: Logging Into DC-1](./dc1.png)
 
-<div class="screenshot">
-    <!-- Insert screenshot -->
-    Screenshot: Start VMs (./vms.png)
-</div>
+⸻
 
-<hr>
+✔️ 3. Select a User to Test
 
-<h2>Part 1 — Triggering an Account Lockout</h2>
+Choose any user account previously created (from the bulk user creation script or manually).
+I will login with
 
-<h3>1. Log into DC-1</h3>
-<p>Use your domain admin account to connect to your domain controller.</p>
+User: gok.paq
+Password: Password1
 
-<div class="screenshot">Screenshot: Login to DC-1</div>
+⸻
 
-<h3>2. Select a Test User</h3>
-<p>Choose any user you previously created using your PowerShell bulk-creation script.</p>
+🔧 Part 2 — Configure Group Policy Account Lockout
 
-<div class="screenshot">Screenshot: User list in ADUC</div>
+✔️ 1. Open Group Policy Management on DC-1
 
-<h3>3. Attempt 10 Bad Logins</h3>
-<p>On Client-1, attempt to log in with the wrong password 10 times.</p>
+Navigate to:
 
-<div class="screenshot">Screenshot: Failed logins on Client-1</div>
+Group Policy Management → Default Domain Policy → Edit 
 
-<hr>
+Screenshot Placeholder:
+![Screenshot: Group Policy Editor](./gpo.png)
 
-<h2>Part 2 — Configure Account Lockout Policy</h2>
+⸻
 
-<h3>4. Edit Group Policy</h3>
-<p>Navigate to:</p>
-<ul>
-    <li><strong>Group Policy Management</strong></li>
-    <li><strong>Default Domain Policy → Edit</strong></li>
-</ul>
+✔️ 2. Set Account Lockout Threshold
 
-<p>Modify the account lockout settings:</p>
+Path:
 
-<table border="1" cellpadding="8">
-<tr><th>Setting</th><th>Value</th></tr>
-<tr><td>Account lockout threshold</td><td>5 attempts</td></tr>
-<tr><td>Reset counter after</td><td>5 minutes</td></tr>
-<tr><td>Account lockout duration</td><td>5 minutes</td></tr>
-</table>
+Computer Configuration → Policies → Windows Settings → Security Settings → Account Policies → Account Lockout Policy
 
-<div class="screenshot">Screenshot: GPO settings for account lockout</div>
+Configure:
+	•	Account Lockout Threshold: 5 attempts
+	•	Automatically sets:
+	•	Reset account lockout counter: 10 minutes 
+	•	Account lockout duration: 30 minutes
 
-<div class="note">
-Run <strong>gpupdate /force</strong> on both DC-1 and Client-1.
-</div>
+Screenshot Placeholder:
+![Screenshot: Lockout Policy Configured](./lockout.png)
 
-<h3>5. Attempt 6 Bad Logins</h3>
-<p>The account should now be locked after the sixth attempt.</p>
 
-<div class="screenshot">Screenshot: Account locked during login</div>
+⸻
 
-<hr>
+✔️ 3. Force Policy Update
 
-<h2>Part 3 — Unlocking & Resetting the Account</h2>
+Run on DC-1 and Client-1: gpupdate /force
 
-<h3>6. View the Locked-Out User in ADUC</h3>
-<p>The user will show a “locked out” status in its Account tab.</p>
+Screenshot Placeholder:
+![Screenshot: GPUpdate Force](./gpupdate.png)
 
-<div class="screenshot">Screenshot: Locked-out user in ADUC</div>
+✔️ 4. Trigger Lockout
 
-<h3>7. Unlock & Reset Password</h3>
-<p>Check “Unlock account” and optionally reset the password.</p>
+Attempt to log in 6 times with the wrong password — the account should lock after 5 failed attempts.
 
-<div class="screenshot">Screenshot: Unlock account</div>
+User: gok.paq
+Password: Password1
 
-<h3>8. Successful Login Test</h3>
-<p>Attempt to log in again on Client-1 with the correct password.</p>
+Screenshot Placeholder:
+![Screenshot: Account Locked Message](./locked.png)
 
-<div class="screenshot">Screenshot: Successful login</div>
+⸻
 
-<hr>
+✔️ 5. Verify Lockout in Active Directory
 
-<h2>Part 4 — Disabling & Re-Enabling Accounts</h2>
+In Active Directory Users and Computers (ADUC):
+	•	Find the user
+	•	Notice the “Account is locked out” message
 
-<h3>9. Disable the User</h3>
-<p>Right-click the user in ADUC → <strong>Disable Account</strong>.</p>
+Screenshot Placeholder:
+![Screenshot: ADUC Locked Out](./verify.png)
 
-<div class="screenshot">Screenshot: Disable account</div>
+⸻
 
-<h3>10. Attempt Login While Disabled</h3>
-<p>A disabled account will show an error like:</p>
-<blockquote>Your account has been disabled. Please contact your administrator.</blockquote>
+✔️ 6. Unlock and Reset Password
 
-<div class="screenshot">Screenshot: Disabled login error</div>
+From the user account properties:
+	•	Uncheck “Unlock account”
+	•	Reset password if needed
+	•	Attempt login again
 
-<h3>11. Re-Enable the Account</h3>
-<p>Right-click → <strong>Enable Account</strong>.</p>
+Screenshot Placeholder:
+![Screenshot: Unlock Account in ADUC](./reset.png)
 
-<div class="screenshot">Screenshot: Enable account</div>
+⸻
 
-<h3>12. Login Test After Re-Enabling</h3>
+🧩 Part 3 — Enabling & Disabling Accounts
 
-<div class="screenshot">Screenshot: Login after enabling</div>
+✔️ 1. Disable the Account in ADUC
 
-<hr>
+Right-click the user → Disable Account
 
-<h2>Part 5 — Log Analysis (Security Operations)</h2>
+I Disabled the account gok.paq
 
-<h3>13. Inspect Logs on DC-1</h3>
-<p>Open Event Viewer:</p>
+Screenshot Placeholder:
+![Screenshot: Disable Account](./disable.png)
 
-<ul>
-    <li><strong>Windows Logs → Security</strong></li>
-</ul>
+⸻
 
-Look for:
-<ul>
-    <li><strong>4625</strong> — Failed logon attempts</li>
-    <li><strong>4740</strong> — Account locked out</li>
-</ul>
+✔️ 2. Attempt Login
 
-<div class="screenshot">Screenshot: Security logs on DC-1</div>
+Login should fail with a “Your account has been disabled” message.
 
-<h3>14. Inspect Logs on Client-1</h3>
-<p>Open Event Viewer → Security and check authentication attempts.</p>
+Attemped login with gok.paq
 
-<div class="screenshot">Screenshot: Client-1 logs</div>
+Screenshot Placeholder:
+![Screenshot: Disabled Login Error](./unable.png)
 
-<div class="note">
-This is foundational training for SOC (Security Operations Center) roles.
-More: <a href="https://joshmadakor.tech/cyber">joshmadakor.tech/cyber</a>
-</div>
+⸻
 
-<hr>
+✔️ 3. Re-Enable the Account
 
-<h2>Finishing the Lab</h2>
+Right-click user → Enable Account
+Attempt login again.
 
-<div class="warning">
-<strong>Do NOT delete</strong> your VMs.  
-Simply STOP them in the Azure Portal to save money.
-</div>
-
-<p>This environment is required for upcoming labs.</p>
-
-</div>
-</body>
-</html>
-	
+Screenshot Placeholder:
+![Screenshot: Reenable Account](./enabled.png)
