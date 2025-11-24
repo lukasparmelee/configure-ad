@@ -10,7 +10,7 @@ This tutorial documents the full deployment of an on-premises style Active Direc
 
 You will configure AD DS, join a client to the domain, create domain admins, enable RDP, bulk-create users, and simulate account lockouts.
 
-⸻
+---
 
 🧰 Environments and Technologies Used
 	•	Microsoft Azure (Virtual Machines / Networking)
@@ -20,17 +20,17 @@ You will configure AD DS, join a client to the domain, create domain admins, ena
 	•	PowerShell / PowerShell ISE
 	•	Windows Event Viewer
 
-⸻
+---
 
 💻 Operating Systems Used
 	•	Windows Server 2022 (Domain Controller)
 	•	Windows 10 (21H2) (Client Machine)
 
-⸻
+---
 
 🏗️ Part 1 — Deploy & Configure Active Directory
 
-⸻
+---
 
 ⚙️ Step 1: Create Domain Controller (DC-1)
 
