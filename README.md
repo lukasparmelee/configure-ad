@@ -13,18 +13,18 @@ You will configure AD DS, join a client to the domain, create domain admins, ena
 ---
 
 🧰 Environments and Technologies Used
-	•	Microsoft Azure (Virtual Machines / Networking)
-	•	Remote Desktop Protocol (RDP)
-	•	Active Directory Domain Services (AD DS)
-	•	Group Policy Management
-	•	PowerShell / PowerShell ISE
-	•	Windows Event Viewer
+	- Microsoft Azure (Virtual Machines / Networking)
+	-	Remote Desktop Protocol (RDP)
+	-	Active Directory Domain Services (AD DS)
+	-	Group Policy Management
+	-	PowerShell / PowerShell ISE
+	-	Windows Event Viewer
 
 ---
 
 💻 Operating Systems Used
-	•	Windows Server 2022 (Domain Controller)
-	•	Windows 10 (21H2) (Client Machine)
+	-	Windows Server 2022 (Domain Controller)
+	-	Windows 10 (21H2) (Client Machine)
 
 ---
 
@@ -37,13 +37,13 @@ You will configure AD DS, join a client to the domain, create domain admins, ena
 Azure Setup
 
 Created a new:
-	•	Resource Group
-	•	Virtual Network + Subnet
-	•	Virtual Machine:
-	•	Name: DC-1
-	•	OS: Windows Server 2022
-	•	Username: labuser
-	•	Password: Cyberlab123!
+	-	Resource Group
+	-	Virtual Network + Subnet
+	-	Virtual Machine:
+	-	Name: DC-1
+	-	OS: Windows Server 2022
+	-	Username: labuser
+	-	Password: Cyberlab123!
 
 Set DC-1’s NIC Private IP to Static after deployment.
 
