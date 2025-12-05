@@ -338,13 +338,3 @@ Right-click → Enable Account
 </p>
 
 ---
-
-🧠 Skills Demonstrated
-	•	Azure VM provisioning
-	•	Active Directory installation & forest creation
-	•	DNS configuration & domain joining
-	•	Group Policy configuration
-	•	RDP security configuration
-	•	Bulk AD user creation (PowerShell)
-	•	AD account lifecycle management
-	•	Account lockout simulation
